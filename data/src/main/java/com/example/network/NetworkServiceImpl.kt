@@ -3,6 +3,7 @@ package com.example.network
 import com.example.domain.model.Product
 import com.example.domain.network.NetworkService
 import com.example.domain.network.ResultWrapper
+import com.example.model.DataProductModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -21,8 +22,8 @@ class NetworkServiceImpl(val client: HttpClient) : NetworkService {
         return makeWebRequest(
             url = "https://fakestoreapi.com/products",
             method = HttpMethod.Get,
-            mapper = { dataModels: List<Product> ->
-                dataModels
+            mapper = { dataModels: List<DataProductModel> ->
+                dataModels.map { it.toProduct() }
             }
         )
     }
