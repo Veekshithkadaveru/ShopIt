@@ -1,5 +1,7 @@
 package com.example.di
 
+import com.example.domain.network.NetworkService
+import com.example.network.NetworkServiceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -23,5 +25,9 @@ val networkModule = module {
                 level = LogLevel.ALL
             }
         }
+    }
+
+    single<NetworkService> {
+        NetworkServiceImpl(get())
     }
 }
